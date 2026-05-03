@@ -14,6 +14,6 @@ Every morning, it ran fast through the tall grass. Then, it jumped into the blue
 const audio = await tts.generate(text, {
   // Use `tts.list_voices()` to list all available voices
   voice: "af_bella",
-  speed: 0.8,
+  // speed: 0.8,
 });
-audio.save("output/tiger2.wav");
+audio.save("output/tiger.wav");
