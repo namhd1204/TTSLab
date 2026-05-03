@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import torch
-from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
+from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline, GenerationConfig
 from rainbow_print import rprint
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -25,7 +25,11 @@ rprint.info('loading model to device...')
 model.to(device)
 
 rprint.info('loading processor...')
-processor = AutoProcessor.from_pretrained(model_id)
+processor = AutoProcessor.from_pretrained(
+    model_id, 
+    token=os.getenv("HF_TOKEN"),
+    clean_up_tokenization_spaces=False
+)
 
 rprint.info('creating pipeline...')
 pipe = pipeline(
@@ -35,9 +39,19 @@ pipe = pipeline(
     feature_extractor=processor.feature_extractor,
     dtype=torch_dtype,
     device=device,
-    stride_length_s=5
+    stride_length_s=5,
+    generate_kwargs={
+        "language": "english",
+    }
 )
 
-result = pipe('output/tiger.wav', generate_kwargs={"language": "english"})
-rprint.info("Transcription result:")
+gen_config = GenerationConfig.from_pretrained(model_id)
+gen_config.update(
+    language="english",
+    task="transcribe",
+)
+
+result = pipe('output/tiger.wav', 
+    generate_kwargs={"generation_config": gen_config}
+)
 rprint.info(result["text"])
