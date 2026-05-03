@@ -1,3 +1,10 @@
 torch
+torchvision
+torchaudio
 transformers
 datasets
+accelerate
+soundfile
+librosa
+torchcodec
+colorama
