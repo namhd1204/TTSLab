@@ -5,7 +5,7 @@ load_dotenv()
 
 import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline, GenerationConfig
-from rainbow_print import rprint
+from libs.python.rainbow_print import rprint
 
 os.environ["HF_TOKEN"] = os.getenv('HF_TOKEN')
 

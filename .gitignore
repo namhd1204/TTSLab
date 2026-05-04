@@ -5,3 +5,7 @@ output/
 __pycache__
 
 .env
+
+package-lock.json
+
+.venv

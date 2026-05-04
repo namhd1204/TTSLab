@@ -20,6 +20,12 @@ uv pip install -r requirements.txt
 #### Speech to text
 
 ```sh
-py libs\speech-to-text.py
+py libs\python\speech-to-text.py
+```
+
+#### Text generation
+
+```py
+py libs\python\text-generation.py
 ```
 
