@@ -6,11 +6,10 @@ import fs from "fs";
 
 const transcriber = await pipeline(
   "automatic-speech-recognition",
-  //   "onnx-community/whisper-large-v3-turbo", // Model hỗ trợ tiếng Việt
   "distil-whisper/distil-large-v3",
 );
 // Đường dẫn tới file wav trên máy bạn
-const filePath = path.resolve("output/tiger.wav");
+const filePath = path.resolve("output/recording.wav");
 
 // 1. Đọc file từ ổ cứng vào Buffer
 const buffer = fs.readFileSync(filePath);

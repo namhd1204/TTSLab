@@ -51,7 +51,7 @@ gen_config.update(
     task="transcribe",
 )
 
-result = pipe('output/tiger.wav', 
+result = pipe('output/recording.wav', 
     generate_kwargs={"generation_config": gen_config}
 )
 rprint.info(result["text"])
