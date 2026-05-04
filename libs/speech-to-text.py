@@ -7,6 +7,8 @@ import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline, GenerationConfig
 from rainbow_print import rprint
 
+os.environ["HF_TOKEN"] = os.getenv('HF_TOKEN')
+
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
@@ -18,7 +20,7 @@ model = AutoModelForSpeechSeq2Seq.from_pretrained(
     dtype=torch_dtype, 
     low_cpu_mem_usage=True, 
     use_safetensors=True,
-    token=os.getenv("HF_TOKEN")
+    # token=os.getenv("HF_TOKEN")
 )
 
 rprint.info('loading model to device...')
@@ -27,7 +29,7 @@ model.to(device)
 rprint.info('loading processor...')
 processor = AutoProcessor.from_pretrained(
     model_id, 
-    token=os.getenv("HF_TOKEN"),
+    # token=os.getenv("HF_TOKEN"),
     clean_up_tokenization_spaces=False
 )
 
